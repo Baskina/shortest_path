@@ -38,14 +38,51 @@ const getShortestWay = (givenBlocks, cardinalPoints) => {
     return Math.abs(horizontalPath) + Math.abs(verticalPath);
 };
 
-console.log('tests start');
-console.log(`Shortest path of ${['R2', 'L3']} is ${getShortestWay(['R2', 'L3'], cardinalPoints)}`);
-console.log(`Shortest path of ${['R2', 'R2', 'R2']} is ${getShortestWay(['R2', 'R2', 'R2'], cardinalPoints)}`);
-console.log(`Shortest path of ${['R5', 'L5', 'R5', 'R3']} is ${getShortestWay(['R5', 'L5', 'R5', 'R3'], cardinalPoints)}`);
-console.log(`Shortest path of ${['R6', 'L3', 'L7', 'R1', 'L5', 'R8']} is ${getShortestWay(['R6', 'L3', 'L7', 'R1', 'L5', 'R8'], cardinalPoints)}`);
-console.log(`Shortest path of ${['R1', 'L1', 'R2', 'L4', 'L5', 'L3', 'L2', 'R1']} is ${getShortestWay(['R1', 'L1', 'R2', 'L4', 'L5', 'L3', 'L2', 'R1'], cardinalPoints)}`);
-console.log(`Shortest path of ${['R3', 'L1', 'R1', 'R2', 'R7', 'R9', 'R3', 'R3', 'L6', 'L1', 'L12']} is ${getShortestWay(['R3', 'L1', 'R1', 'R2', 'R7', 'R9', 'R3', 'R3', 'L6', 'L1', 'L12'], cardinalPoints)}`);
-console.log('tests end');
+console.log('=======tests start=======');
 
+function test(desc, fn) {
+    try {
+        fn();
+        console.log('\x1b[32m%s\x1b[0m', '\u2714 ' + desc);
+    } catch (error) {
+        console.log('\n');
+        console.log('\x1b[31m%s\x1b[0m', '\u2718 ' + desc);
+        console.error(error);
+    }
+}
 
-console.log(`Shortest path of ${givenBlocks} is ${getShortestWay(givenBlocks, cardinalPoints)}`);
+function assert(condition) {
+    if (!condition) {
+        throw new Error();
+    }
+}
+
+test(`Shortest path of ${['R2', 'L3']} is 5`, () => {
+    assert(getShortestWay(['R2', 'L3'], cardinalPoints) === 5);
+});
+
+test(`Shortest path of ${['R2', 'R2', 'R2']} is 2`, () => {
+    assert(getShortestWay(['R2', 'R2', 'R2'], cardinalPoints) === 2);
+});
+
+test(`Shortest path of ${['R5', 'L5', 'R5', 'R3']} is 12`, () => {
+    assert(getShortestWay(['R5', 'L5', 'R5', 'R3'], cardinalPoints) === 12);
+});
+
+test(`Shortest path of ${['R6', 'L3', 'L7', 'R1', 'L5', 'R8']} is 18`, () => {
+    assert(getShortestWay(['R6', 'L3', 'L7', 'R1', 'L5', 'R8'], cardinalPoints) === 18);
+});
+
+test(`Shortest path of ${['R1', 'L1', 'R2', 'L4', 'L5', 'L3', 'L2', 'R1']} is 1`, () => {
+    assert(getShortestWay(['R1', 'L1', 'R2', 'L4', 'L5', 'L3', 'L2', 'R1'], cardinalPoints) === 1);
+});
+
+test(`Shortest path of ${['R3', 'L1', 'R1', 'R2', 'R7', 'R9', 'R3', 'R3', 'L6', 'L1', 'L12']} is 12`, () => {
+    assert(getShortestWay(['R3', 'L1', 'R1', 'R2', 'R7', 'R9', 'R3', 'R3', 'L6', 'L1', 'L12'], cardinalPoints) === 12);
+});
+
+test(`Shortest path of ${givenBlocks} is 254`, () => {
+    assert(getShortestWay(givenBlocks, cardinalPoints) === 254);
+});
+
+console.log('=======tests end=======');
