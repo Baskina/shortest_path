@@ -9,7 +9,7 @@ const getShortestWay = (givenBlocks, cardinalPoints) => {
 
     givenBlocks.forEach((item) => {
         const direction = item[0];
-        const blocksNumber = item.split(/R|L/)[1];
+        const blocksNumber = item.substr(1);
         const kDirection = direction === 'R' ? 1 : -1; // coefficient for right/left directions
 
         // found coefficient for north/west, east/south pair
@@ -56,6 +56,14 @@ function assert(condition) {
         throw new Error();
     }
 }
+
+test(`Shortest path of ${['R1000', 'R1']} is 1001`, () => {
+    assert(getShortestWay(['R1000', 'R1'], cardinalPoints) === 1001);
+});
+
+test(`Shortest path of ${['R1000', 'L1']} is 1001`, () => {
+    assert(getShortestWay(['R1000', 'L1'], cardinalPoints) === 1001);
+});
 
 test(`Shortest path of ${['R2', 'L3']} is 5`, () => {
     assert(getShortestWay(['R2', 'L3'], cardinalPoints) === 5);
